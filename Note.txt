@@ -1,9 +1,8 @@
 ✅ = True ❎ = False
 ╔═══════☆♡☆═══════╗
-- Event : ✅
-- Exp : ✅
-- Team : ✅
-- Single : ✅
+- Quest Event : ✅
+- Quest Team : ✅
+- Quest Single : ✅
 - GetItemcode : ✅
-- Login : ✅
+- Login System : ✅
 ╚═══════☆♡☆═══════╝
