@@ -1,1 +1,9 @@
-อ่านทำควย ไรจ๊ะ
+✅ = True ❎ = False
+╔═══════☆♡☆═══════╗
+- Event : ✅
+- Exp : ✅
+- Team : ✅
+- Single : ✅
+- GetItemcode : ✅
+- Login : ✅
+╚═══════☆♡☆═══════╝
