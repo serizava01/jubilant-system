@@ -6,5 +6,5 @@
 - GetItemcode : ✅
 - Login System : ✅
 - Honkai_SR : ✅
-- ZZZ : ❎
+- ZZZ : ✅
 ╚═══════☆♡☆═══════╝
