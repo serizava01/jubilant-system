@@ -5,6 +5,6 @@
 - Quest Single : ✅
 - GetItemcode : ✅
 - Login System : ✅
-- Honkai_SR : ❎
+- Honkai_SR : ✅
 - ZZZ : ✅
 ╚═══════☆♡☆═══════╝
