@@ -16,31 +16,34 @@
         }
         .login-container {
             background-color: #fff;
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
         }
         .login-container h2 {
             margin: 0 0 20px;
             text-align: center;
+            color: #333;
         }
         .login-container input[type="text"],
         .login-container input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 10px 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            box-sizing: border-box;
         }
         .login-container button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background-color: #4CAF50;
             border: none;
             border-radius: 5px;
             color: white;
             font-size: 16px;
+            cursor: pointer;
         }
         .login-container button:hover {
             background-color: #45a049;
@@ -48,9 +51,10 @@
         .login-container .register-link {
             display: block;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 15px;
             color: #4CAF50;
             text-decoration: none;
+            font-size: 14px;
         }
         .login-container .register-link:hover {
             text-decoration: underline;
