@@ -1,66 +1,79 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หน้าเว็บง่ายๆ</title>
+    <title>Login Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
         }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-        }
-        nav {
-            margin: 20px;
-            text-align: center;
-        }
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #4CAF50;
-        }
-        main {
+        .login-container {
+            background-color: #fff;
             padding: 20px;
-            max-width: 800px;
-            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
         }
-        footer {
-            background-color: #4CAF50;
-            color: white;
+        .login-container h2 {
+            margin: 0 0 20px;
             text-align: center;
-            padding: 1rem;
-            position: fixed;
-            bottom: 0;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
             width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+        }
+        .login-container button:hover {
+            background-color: #45a049;
+        }
+        .login-container .register-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .login-container .register-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>ยินดีต้อนรับสู่หน้าเว็บง่ายๆ</h1>
-    </header>
-    <nav>
-        <a href="#">หน้าแรก</a>
-        <a href="#">เกี่ยวกับเรา</a>
-        <a href="#">บริการ</a>
-        <a href="#">ติดต่อเรา</a>
-    </nav>
-    <main>
-        <h2>เกี่ยวกับเรา</h2>
-        <p>
-            <a href="https://serizava01.github.io/jubilant-system/Note.txt">Note</a>
-            <a href="https://serizava01.github.io/jubilant-system/version.txt">Versioon</a>
-        </p>    
-    </main>
-    <footer>
-        <p>ติดต่อเรา: example@example.com</p>
-    </footer>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <a href="/register" class="register-link">Register</a>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            alert('Invalid username or password');
+        });
+    </script>
 </body>
 </html>
