@@ -1,12 +1,12 @@
 {
     "ItemCode": true,
-    "KeyItem": false,
+    "KeyItem": true,
     "Quest_Event": true,
     "Horizonth": true,
     "Honkai_StarRail": false,
     "Macro": true,
-    "AutoSupply_Box": false,
+    "AutoSupply_Box": true,
     "StartGame": true,
     "DownloadFile": true,
-    "ORC_Check": false
+    "ORC_Check": true
 }
