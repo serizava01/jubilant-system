@@ -4,7 +4,7 @@
     "Quest_Event": true,
     "Horizonth": true,
     "Honkai_StarRail": true,
-    "Macro": false,
+    "Macro": true,
     "AutoSupply_Box": true,
     "StartGame": true,
     "DownloadFile": true,
