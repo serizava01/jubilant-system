@@ -1,11 +1,12 @@
 {
     "Horizonth": true,
-    "Honkai_StarRail": true,
+    "Honkai_StarRail": false,
     "Macro": true,
     "AutoSupply_Box": true,
-    "Zenless_Zone_Zero": true,
+    "Zenless_Zone_Zero": false,
     "Cs2": true,
 }
+
 
 
 
