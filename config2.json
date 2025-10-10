@@ -2,10 +2,11 @@
     "Horizonth": true,
     "Honkai_StarRail": true,
     "Macro": true,
-    "AutoSupply_Box": true,
+    "AutoSupply_Box": false,
     "Zenless_Zone_Zero": false,
     "Cs2": true,
 }
+
 
 
 
