@@ -3,349 +3,448 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>โปรแกรมคำนวณราคาขายไอเทม Ghost Soul M</title>
+    <title>เครื่องมือสำหรับเกม Ghost Soul M</title>
+    <link rel="stylesheet" href="./styles.css">
     <style>
+        /* เพิ่มสไตล์สำหรับหน้าเว็บรวม */
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #4CAF50;
+            --legendary-color: #ffd700;
+            --epic-color: #9c27b0;
+            --rare-color: #4caf50;
+        }
+        
         body {
             font-family: 'Sarabun', Arial, sans-serif;
-            max-width: 700px;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .main-container {
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
         }
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
+        
+        .header {
             text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .header p {
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        
+        /* สไตล์แท็บหลัก */
+        .main-tabs-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             margin-bottom: 30px;
         }
-        .tab-container {
-            margin-bottom: 20px;
-        }
-        .tabs {
+        
+        .main-tabs {
             display: flex;
-            border-bottom: 2px solid #ddd;
+            background: linear-gradient(to right, #2c3e50, #4a6491);
         }
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            background-color: #f1f1f1;
-            border: 1px solid #ddd;
-            border-bottom: none;
-            border-radius: 5px 5px 0 0;
-            margin-right: 5px;
-        }
-        .tab.active {
-            background-color: white;
-            border-bottom: 2px solid white;
-            margin-bottom: -2px;
-            font-weight: bold;
-            color: #2196F3;
-        }
-        .tab-content {
-            display: none;
-            padding: 20px 0;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #555;
-        }
-        input[type="number"], input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        .slider-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        input[type="range"] {
-            flex-grow: 1;
-        }
-        .percentage-value {
-            min-width: 50px;
-            text-align: center;
-            font-weight: bold;
-        }
-        .result {
-            background-color: #e8f4fd;
+        
+        .main-tab {
+            flex: 1;
             padding: 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-            border-left: 4px solid #2196F3;
-        }
-        .result h3 {
-            margin-top: 0;
-            color: #2196F3;
-        }
-        .calculation {
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
-        }
-        .calculation h4 {
-            margin-top: 0;
-            color: #555;
-        }
-        button {
-            background-color: #4CAF50;
+            text-align: center;
             color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .exchange-rate {
-            background-color: #fff3cd;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border-left: 4px solid #ffc107;
-        }
-        .gold-result {
-            background-color: #d4edda;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 15px;
-            border-left: 4px solid #28a745;
-        }
-        .gold-number {
             font-size: 1.2em;
             font-weight: bold;
-            color: #2c5f2d;
+            transition: all 0.3s;
+            border-bottom: 4px solid transparent;
         }
-        .unit {
-            font-size: 0.9em;
-            color: #666;
-            margin-left: 5px;
+        
+        .main-tab:hover {
+            background: rgba(255,255,255,0.1);
         }
-        .input-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        
+        .main-tab.active {
+            background: rgba(255,255,255,0.2);
+            border-bottom-color: var(--primary-color);
         }
-        .input-group input {
-            flex: 1;
+        
+        .main-tab-content {
+            display: none;
+            padding: 30px;
         }
-        .input-group span {
-            white-space: nowrap;
+        
+        .main-tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
         }
-        .note {
-            font-size: 0.85em;
-            color: #666;
-            margin-top: 5px;
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .exchange-info {
-            background-color: #e7f3ff;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #2196F3;
+        
+        /* คอนเทนเนอร์สำหรับแต่ละเครื่องมือ */
+        .tool-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* สไตล์สำหรับ Gacha Simulator */
+        .gacha-container {
+            max-width: 100%;
+        }
+        
+        .gacha-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .gacha-controls {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* สไตล์สำหรับ Calculator */
+        .calculator-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* ฟุตเตอร์ */
+        .footer {
+            text-align: center;
+            color: rgb(0, 0, 0);
+            padding: 20px;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+        
+        /* Animation สำหรับการสลับแท็บ */
+        .tab-switch-animation {
+            animation: tabSwitch 0.3s ease;
+        }
+        
+        @keyframes tabSwitch {
+            0% { opacity: 0; transform: translateX(-20px); }
+            100% { opacity: 1; transform: translateX(0); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>โปรแกรมคำนวณราคาขายไอเทม</h1>
+    <div class="main-container">
+        <div class="header">
+            <h1>🛠️ เครื่องมือสำหรับเกม Ghost Soul M</h1>
+            <p>รวมเครื่องมือที่จำเป็นสำหรับการเล่นเกมไว้ในที่เดียว</p>
+        </div>
         
-        <div class="tab-container">
-            <div class="tabs">
-                <div class="tab active" data-tab="tab1">คำนวณราคา ลงไอเทมขายในเกม</div>
-                <div class="tab" data-tab="tab2">คำนวณ เงิน บาท / เงิน Gold</div>
-                <div class="tab" data-tab="tab3">คำนวณจาก Gold ที่ต้องการขาย</div>
-            </div>
-            
-            <!-- แท็บ 1: คำนวณจากเงินบาท -->
-            <div id="tab1" class="tab-content active">
-                <div class="form-group">
-                    <label for="targetPrice">ยอดรวมราคาที่ต้องการ (Gold)</label>
-                    <input type="number" id="targetPrice" placeholder="กรุณากรอกยอดรวมที่ต้องการ">
+        <div class="main-tabs-container">
+            <div class="main-tabs">
+                <div class="main-tab active" data-main-tab="gacha">
+                    🎮 Gacha Simulator
                 </div>
-                
-                <div class="form-group">
-                    <label>ค่าธรรมเนียมการลงทะเบียนขายไอเทม</label>
-                    <input type="text" value="2%" readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label for="commissionRate">ค่าธรรมเนียมหลังขายไอเทม</label>
-                    <div class="slider-container">
-                        <input type="range" id="commissionRate" min="0" max="20" step="0.5" value="5">
-                        <span class="percentage-value" id="commissionValue">5%</span>
-                    </div>
-                </div>
-                
-                <button id="calculateBtn">คำนวณราคา</button>
-                
-                <div class="result" id="result" style="display: none;">
-                    <h3>สรุปผลการคำนวณ</h3>
-                    <p>เพื่อให้ได้เงิน <span id="targetResult">0</span> Gold หลังหักค่าธรรมเนียมทั้งหมด</p>
-                    <p>คุณต้องตั้งราคาขายที่ <strong><span id="finalPrice">0</span> Gold</strong></p>
-                    
-                    <div class="calculation">
-                        <h4>รายละเอียดการคำนวณ</h4>
-                        <p>ราคาขายที่ตั้ง: <span id="calcPrice">0</span> Gold</p>
-                        <p>ค่าธรรมเนียมการลงทะเบียน (2%): <span id="calcRegFee">0</span> Gold</p>
-                        <p>ค่าธรรมเนียมหลังขาย (<span id="calcCommPercent">0</span>%): <span id="calcCommFee">0</span> Gold</p>
-                        <p>ยอดรวมหลังหักค่าธรรมเนียม: <span id="calcNet">0</span> Gold</p>
-                    </div>
+                <div class="main-tab" data-main-tab="calculator">
+                    💰 Gold Calculator
                 </div>
             </div>
             
-            <!-- แท็บ 2: คำนวณจากเงินที่ลูกค้าจ่าย -->
-            <div id="tab2" class="tab-content">
-                <div class="exchange-rate">
-                    <h3>อัตราแลกเปลี่ยน Gold</h3>
-                    <div class="form-group">
-                        <label for="goldRate">1M Gold = กี่บาท</label>
-                        <div class="input-group">
-                            <input type="number" id="goldRate" value="" step="0.01" min="0.01">
-                            <span>บาท</span>
-                        </div>
-                        <div class="note">หมายเหตุ: 1M Gold = 1,000,000 Gold</div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="customerMoney">ลูกค้าจ่ายเงินมา (บาท)</label>
-                    <div class="input-group">
-                        <input type="number" id="customerMoney" placeholder="กรุณากรอกจำนวนเงินที่ลูกค้าจ่าย">
-                        <span>บาท</span>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>ค่าธรรมเนียมการลงทะเบียนขายไอเทม</label>
-                    <input type="text" value="2%" readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label for="commissionRate2">ค่าธรรมเนียมหลังขายไอเทม</label>
-                    <div class="slider-container">
-                        <input type="range" id="commissionRate2" min="0" max="20" step="0.5" value="5">
-                        <span class="percentage-value" id="commissionValue2">5%</span>
-                    </div>
-                </div>
-                
-                <button id="calculateGoldBtn">คำนวณราคา</button>
-                
-                <div class="result" id="resultGold" style="display: none;">
-                    <h3>สรุปผลการคำนวณ</h3>
-                    <div class="gold-result">
-                        <p>ลูกค้าจ่ายเงินมา: <span class="gold-number" id="customerMoneyResult">0</span> บาท</p>
-                        <p>ลูกค้าควรได้: <span class="gold-number" id="customerGetsGold">0</span> Gold</p>
-                    </div>
-                    <p>เพื่อให้ลูกค้าได้ Gold ตามจำนวนด้านบน</p>
-                    <p>คุณต้องตั้งราคาขายที่ <strong><span class="gold-number" id="finalPriceGold">0</span> Gold</strong></p>
+            <!-- แท็บ Gacha Simulator -->
+            <div id="gacha-tab" class="main-tab-content active">
+                <div class="tool-container gacha-container">
+                    <h2>Gacha Simulator</h2>
+                    <p>จำลองการเปิดกล่องกาชาเพื่อทดสอบดวง!</p>
                     
-                    <div class="calculation">
-                        <h4>รายละเอียดการคำนวณในเกม</h4>
-                        <p>ราคาขายที่ตั้ง: <span class="gold-number" id="calcPriceGold">0</span> Gold</p>
-                        <p>ค่าธรรมเนียมการลงทะเบียน (2%): <span class="gold-number" id="calcRegFeeGold">0</span> Gold</p>
-                        <p>ค่าธรรมเนียมหลังขาย (<span id="calcCommPercentGold">0</span>%): <span class="gold-number" id="calcCommFeeGold">0</span> Gold</p>
-                        <p>ลูกค้าได้รับ: <span class="gold-number" id="calcNetGold">0</span> Gold</p>
+                    <div class="controls">
+                        <label>เลือกกล่องกาชา:</label>
+                        <select id="boxSelect"></select>
+                        <div class="buttons">
+                            <button onclick="rollItem(1)">สุ่ม 1 ครั้ง</button>
+                            <button onclick="rollItem(10)">สุ่ม 10 ครั้ง</button>
+                            <button onclick="rollItem(100)">สุ่ม 100 ครั้ง</button>
+                            <button onclick="resetCounters()" class="reset-btn">รีเซ็ตนับ</button>
+                        </div>
+                        
+                        <!-- ส่วนแสดงจำนวนไอเทมตามระดับความหายาก -->
+                        <div class="counter-container">
+                            <h3>จำนวนไอเทมตามระดับ:</h3>
+                            <div class="counters">
+                                <div class="counter legendary">
+                                    <span class="counter-label">Legendary:</span>
+                                    <span id="count-legendary" class="counter-value">0</span>
+                                </div>
+                                <div class="counter epic">
+                                    <span class="counter-label">Epic:</span>
+                                    <span id="count-epic" class="counter-value">0</span>
+                                </div>
+                                <div class="counter artisan">
+                                    <span class="counter-label">Artisan:</span>
+                                    <span id="count-artisan" class="counter-value">0</span>
+                                </div>
+                                <div class="counter rare">
+                                    <span class="counter-label">Rare:</span>
+                                    <span id="count-rare" class="counter-value">0</span>
+                                </div>
+                                <div class="counter common">
+                                    <span class="counter-label">Common:</span>
+                                    <span id="count-common" class="counter-value">0</span>
+                                </div>
+                                <div class="counter total">
+                                    <span class="counter-label">รวมทั้งหมด:</span>
+                                    <span id="count-total" class="counter-value">0</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <div class="header-area">
+                        <div id="gacha-log" class="log-panel"></div>
+                    </div>
+                    
+                    <h2>ผลลัพธ์:</h2>
+                    <div id="result" class="result"></div>
                 </div>
             </div>
-
-            <!-- แท็บ 3: คำนวณจาก Gold ที่ต้องการขาย -->
-            <div id="tab3" class="tab-content">
-                <div class="exchange-rate">
-                    <h3>อัตราแลกเปลี่ยน Gold</h3>
-                    <div class="form-group">
-                        <label for="goldRate3">1M Gold = กี่บาท</label>
-                        <div class="input-group">
-                            <input type="number" id="goldRate3" value="25" step="0.01" min="0.01">
-                            <span>บาท</span>
+            
+            <!-- แท็บ Gold Calculator -->
+            <div id="calculator-tab" class="main-tab-content">
+                <div class="tool-container calculator-container">
+                    <!-- ใส่โค้ด Calculator ทั้งหมดที่นี่ -->
+                    <h2>โปรแกรมคำนวณราคาขายไอเทม</h2>
+                    <div class="tab-container">
+                        <div class="tabs">
+                            <!--<div class="tab" data-tab="tab1">คำนวณราคา ลงไอเทมขายในเกม</div>-->
+                            <div class="tab active" data-tab="tab2">คำนวณ เงิน บาท = > เงิน Gold</div>
+                            <div class="tab" data-tab="tab3">คำนวณจาก Gold ที่ต้องการขาย</div>
                         </div>
-                        <div class="note">หมายเหตุ: 1M Gold = 1,000,000 Gold</div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="targetGoldAmount">มี Gold ต้องการขาย</label>
-                    <div class="input-group">
-                        <input type="number" id="targetGoldAmount" placeholder="กรุณากรอกจำนวน Gold ที่ต้องการขาย">
-                        <span>Gold</span>
-                    </div>
-                    <small>ตัวอย่าง: 6000000 สำหรับ 6,000,000 Gold</small>
-                </div>
-                
-                <div class="form-group">
-                    <label>ค่าธรรมเนียมการลงทะเบียนขายไอเทม</label>
-                    <input type="text" value="2%" readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label for="commissionRate3">ค่าธรรมเนียมหลังขายไอเทม</label>
-                    <div class="slider-container">
-                        <input type="range" id="commissionRate3" min="0" max="20" step="0.5" value="5">
-                        <span class="percentage-value" id="commissionValue3">5%</span>
-                    </div>
-                </div>
-                
-                <button id="calculateGoldSellBtn">คำนวณราคา</button>
-                
-                <div class="result" id="resultGoldSell" style="display: none;">
-                    <h3>สรุปผลการคำนวณ</h3>
-                    
-                    <!-- เพิ่มส่วนแสดงอัตราแลกเปลี่ยนตรงนี้ -->
-                    <div class="exchange-info">
-                        <p><strong>อัตราแลกเปลี่ยน: 1M Gold = <span id="displayExchangeRate">9</span> บาท</strong></p>
-                    </div>
-                    
-                    <div class="gold-result">
-                        <p>มี Gold ต้องการขาย: <span class="gold-number" id="targetGoldAmountResult">0</span> Gold</p>
-                        <p>เท่ากับ <span id="goldToBahtResult">0</span> บาท (ตามอัตราแลกเปลี่ยน)</p>
-                    </div>
-                    <p>เพื่อให้ได้ <span class="gold-number" id="targetGoldFinal3">0</span> Gold หลังหักค่าธรรมเนียมทั้งหมด</p>
-                    <p>คุณต้องตั้งราคาขายที่ <strong><span class="gold-number" id="finalPriceGold3">0</span> Gold</strong></p>
-                    
-                    <div class="calculation">
-                        <h4>รายละเอียดการคำนวณในเกม</h4>
-                        <p>ราคาขายที่ตั้ง: <span class="gold-number" id="calcPriceGold3">0</span> Gold</p>
-                        <p>ค่าธรรมเนียมการลงทะเบียน (2%): <span class="gold-number" id="calcRegFeeGold3">0</span> Gold</p>
-                        <p>ค่าธรรมเนียมหลังขาย (<span id="calcCommPercentGold3">0</span>%): <span class="gold-number" id="calcCommFeeGold3">0</span> Gold</p>
-                        <p>ยอดรวมหลังหักค่าธรรมเนียม: <span class="gold-number" id="calcNetGold3">0</span> Gold</p>
-                    </div>
+                        
+                            <!-- ในส่วน Calculator Tab 1 (แก้ไขเฉพาะ) -->
+                        <div id="tab1" class="tab-content active">
+                            <div class="form-group">
+                                <label for="targetPrice">ยอดรวมราคาที่ต้องการ (Gold)</label>
+                                <input type="number" id="targetPrice" placeholder="กรุณากรอกยอดรวมที่ต้องการ">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ค่าธรรมเนียมการลงทะเบียนขายไอเทม</label>
+                                <input type="text" value="2%" readonly>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="commissionRate">ค่าธรรมเนียมหลังขายไอเทม</label>
+                                <div class="slider-container">
+                                    <input type="range" id="commissionRate" min="0" max="20" step="0.5" value="5">
+                                    <span class="percentage-value" id="commissionValue">5%</span>
+                                </div>
+                            </div>
+                            
+                            <button id="calculateBtn">คำนวณราคา</button>
+                            
+                            <!-- เปลี่ยน id จาก result เป็น calcResult1 -->
+                            <div class="result" id="calcResult1" style="display: none;">
+                                <h3>สรุปผลการคำนวณ</h3>
+                                <p>เพื่อให้ได้เงิน <span id="targetResult">0</span> Gold หลังหักค่าธรรมเนียมทั้งหมด</p>
+                                <p>คุณต้องตั้งราคาขายที่ <strong><span id="finalPrice">0</span> Gold</strong></p>
+                                
+                                <div class="calculation">
+                                    <h4>รายละเอียดการคำนวณ</h4>
+                                    <p>ราคาขายที่ตั้ง: <span id="calcPrice">0</span> Gold</p>
+                                    <p>ค่าธรรมเนียมการลงทะเบียน (2%): <span id="calcRegFee">0</span> Gold</p>
+                                    <p>ค่าธรรมเนียมหลังขาย (<span id="calcCommPercent">0</span>%): <span id="calcCommFee">0</span> Gold</p>
+                                    <p>ยอดรวมหลังหักค่าธรรมเนียม: <span id="calcNet">0</span> Gold</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- แท็บ 2: คำนวณจากเงินที่ลูกค้าจ่าย -->
+                        <div id="tab2" class="tab-content active">
+                            <div class="exchange-rate">
+                                <h3>อัตราแลกเปลี่ยน Gold</h3>
+                                <div class="form-group">
+                                    <label for="goldRate">1M Gold = กี่บาท</label>
+                                    <div class="input-group">
+                                        <input type="number" id="goldRate" value="0" step="0.01" min="0.01">
+                                        <span>บาท</span>
+                                    </div>
+                                    <div class="note">หมายเหตุ: 1M Gold = 1,000,000 Gold</div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="customerMoney">ลูกค้าจ่ายเงินมา (บาท)</label>
+                                <div class="input-group">
+                                    <input type="number" id="customerMoney" placeholder="กรุณากรอกจำนวนเงินที่ลูกค้าจ่าย">
+                                    <span>บาท</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ค่าธรรมเนียมการลงทะเบียนขายไอเทม</label>
+                                <input type="text" value="2%" readonly>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="commissionRate2">ค่าธรรมเนียมหลังขายไอเทม</label>
+                                <div class="slider-container">
+                                    <input type="range" id="commissionRate2" min="0" max="20" step="0.5" value="5">
+                                    <span class="percentage-value" id="commissionValue2">5%</span>
+                                </div>
+                            </div>
+                            
+                            <button id="calculateGoldBtn">คำนวณราคา</button>
+                            
+                            <div class="result" id="resultGold" style="display: none;">
+                                <h3>สรุปผลการคำนวณ</h3>
+                                <div class="gold-result">
+                                    <p>ลูกค้าจ่ายเงินมา: <span class="gold-number" id="customerMoneyResult">0</span> บาท</p>
+                                    <p>ลูกค้าควรได้: <span class="gold-number" id="customerGetsGold">0</span> Gold</p>
+                                </div>
+                                <p>เพื่อให้ลูกค้าได้ Gold ตามจำนวนด้านบน</p>
+                                <p>คุณต้องตั้งราคาขายที่ <strong><span class="gold-number" id="finalPriceGold">0</span> Gold</strong></p>
+                                
+                                <div class="calculation">
+                                    <h4>รายละเอียดการคำนวณในเกม</h4>
+                                    <p>ราคาขายที่ตั้ง: <span class="gold-number" id="calcPriceGold">0</span> Gold</p>
+                                    <p>ค่าธรรมเนียมการลงทะเบียน (2%): <span class="gold-number" id="calcRegFeeGold">0</span> Gold</p>
+                                    <p>ค่าธรรมเนียมหลังขาย (<span id="calcCommPercentGold">0</span>%): <span class="gold-number" id="calcCommFeeGold">0</span> Gold</p>
+                                    <p>ลูกค้าได้รับ: <span class="gold-number" id="calcNetGold">0</span> Gold</p>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="calculation">
-                        <h4>รายละเอียดการคำนวณเป็นเงินบาท</h4>
-                        <p>มูลค่ารวม: <span id="totalValueBaht">0</span> บาท</p>
-                        <p>ยอดสุทธิที่ได้รับ: <span id="netAmountBaht">0</span> บาท</p>
+                        <!-- แท็บ 3: คำนวณจาก Gold ที่ต้องการขาย -->
+                        <div id="tab3" class="tab-content">
+                            <div class="exchange-rate">
+                                <h3>อัตราแลกเปลี่ยน Gold</h3>
+                                <div class="form-group">
+                                    <label for="goldRate3">1M Gold = กี่บาท</label>
+                                    <div class="input-group">
+                                        <input type="number" id="goldRate3" value="0" step="0.01" min="0.01">
+                                        <span>บาท</span>
+                                    </div>
+                                    <div class="note">หมายเหตุ: 1M Gold = 1,000,000 Gold</div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="targetGoldAmount">มี Gold ต้องการขาย</label>
+                                <div class="input-group">
+                                    <input type="number" id="targetGoldAmount" placeholder="กรุณากรอกจำนวน Gold ที่ต้องการขาย">
+                                    <span>Gold</span>
+                                </div>
+                                <small>ตัวอย่าง: 6000000 สำหรับ 6,000,000 Gold</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ค่าธรรมเนียมการลงทะเบียนขายไอเทม</label>
+                                <input type="text" value="2%" readonly>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="commissionRate3">ค่าธรรมเนียมหลังขายไอเทม</label>
+                                    <div class="slider-container">
+                                    <input type="range" id="commissionRate3" min="0" max="20" step="0.5" value="5">
+                                    <span class="percentage-value" id="commissionValue3">5%</span>
+                                </div>
+                            </div>
+                            
+                            <button id="calculateGoldSellBtn">คำนวณราคา</button>
+                            
+                            <div class="result" id="resultGoldSell" style="display: none;">
+                                <h3>สรุปผลการคำนวณ</h3>
+                                
+                                <!-- เพิ่มส่วนแสดงอัตราแลกเปลี่ยนตรงนี้ -->
+                                <div class="exchange-info">
+                                    <p><strong>อัตราแลกเปลี่ยน: 1M Gold = <span id="displayExchangeRate">9</span> บาท</strong></p>
+                                </div>
+                                
+                                <div class="gold-result">
+                                    <p>มี Gold ต้องการขาย: <span class="gold-number" id="targetGoldAmountResult">0</span> Gold</p>
+                                    <p>เท่ากับ <span id="goldToBahtResult">0</span> บาท (ตามอัตราแลกเปลี่ยน)</p>
+                                </div>
+                                <p>เพื่อให้ได้ <span class="gold-number" id="targetGoldFinal3">0</span> Gold หลังหักค่าธรรมเนียมทั้งหมด</p>
+                                <p>คุณต้องตั้งราคาขายที่ <strong><span class="gold-number" id="finalPriceGold3">0</span> Gold</strong></p>
+                                
+                                <div class="calculation">
+                                    <h4>รายละเอียดการคำนวณในเกม</h4>
+                                    <p>ราคาขายที่ตั้ง: <span class="gold-number" id="calcPriceGold3">0</span> Gold</p>
+                                    <p>ค่าธรรมเนียมการลงทะเบียน (2%): <span class="gold-number" id="calcRegFeeGold3">0</span> Gold</p>
+                                    <p>ค่าธรรมเนียมหลังขาย (<span id="calcCommPercentGold3">0</span>%): <span class="gold-number" id="calcCommFeeGold3">0</span> Gold</p>
+                                    <p>ยอดรวมหลังหักค่าธรรมเนียม: <span class="gold-number" id="calcNetGold3">0</span> Gold</p>
+                                </div>
+
+                                <div class="calculation">
+                                    <h4>รายละเอียดการคำนวณเป็นเงินบาท</h4>
+                                    <p>มูลค่ารวม: <span id="totalValueBaht">0</span> บาท</p>
+                                    <p>ยอดสุทธิที่ได้รับ: <span id="netAmountBaht">0</span> บาท</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <div class="footer">
+            <p>สร้างด้วย ❤️ สำหรับนักเล่น Ghost Soul M</p>
+            <p>© 2024 Ghost Soul M Tools - เวอร์ชัน 2.0</p>
+        </div>
     </div>
 
+    <!-- JavaScript -->
+    <script src="./data/items.js"></script>
+    <script src="./data/boxes.js"></script>
+    <script src="./main.js"></script>
+    
     <script>
+        // JavaScript สำหรับแท็บหลัก
         document.addEventListener('DOMContentLoaded', function() {
+            // ฟังก์ชันสำหรับแท็บหลัก
+            const mainTabs = document.querySelectorAll('.main-tab');
+            mainTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // ลบ active class ออกจากแท็บทั้งหมด
+                    mainTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // ซ่อนเนื้อหาทั้งหมด
+                    document.querySelectorAll('.main-tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // แสดงเนื้อหาตามแท็บที่เลือก
+                    const tabId = this.getAttribute('data-main-tab');
+                    const content = document.getElementById(`${tabId}-tab`);
+                    content.classList.add('active');
+                    content.classList.add('tab-switch-animation');
+                    
+                    // ลบ animation class หลังจากจบ animation
+                    setTimeout(() => {
+                        content.classList.remove('tab-switch-animation');
+                    }, 300);
+                });
+            });
+            
+            // ฟังก์ชัน format number สำหรับ calculator
             function formatNumber(num) {
                 return Math.round(num).toLocaleString('en-US');
             }
@@ -357,6 +456,7 @@
                 });
             }
 
+            // Calculator JavaScript (จากโค้ดเดิม)
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
@@ -371,42 +471,45 @@
                 });
             });
             
+            // Tab 1
             const commissionRate = document.getElementById('commissionRate');
             const commissionValue = document.getElementById('commissionValue');
             const targetPrice = document.getElementById('targetPrice');
             const calculateBtn = document.getElementById('calculateBtn');
-            const result = document.getElementById('result');
+            const resultCalc = document.getElementById('result');
             
-            commissionRate.addEventListener('input', function() {
-                commissionValue.textContent = this.value + '%';
-            });
+            if (commissionRate) {
+                commissionRate.addEventListener('input', function() {
+                    commissionValue.textContent = this.value + '%';
+                });
 
-            calculateBtn.addEventListener('click', function() {
-                const target = parseFloat(targetPrice.value);
-                
-                if (isNaN(target) || target <= 0) {
-                    alert('กรุณากรอกยอดรวมที่ต้องการเป็นตัวเลขที่มากกว่า 0');
-                    return;
-                }
+                calculateBtn.addEventListener('click', function() {
+                    const target = parseFloat(targetPrice.value);
+                    
+                    if (isNaN(target) || target <= 0) {
+                        alert('กรุณากรอกยอดรวมที่ต้องการเป็นตัวเลขที่มากกว่า 0');
+                        return;
+                    }
 
-                const commissionPercent = parseFloat(commissionRate.value) / 100;
-                const registrationFeePercent = 0.02;
-                const sellingPrice = target / (1 - (registrationFeePercent + commissionPercent));
-                const registrationFee = sellingPrice * registrationFeePercent;
-                const commissionFee = sellingPrice * commissionPercent;
-                const netAmount = sellingPrice - registrationFee - commissionFee;
-                
-                document.getElementById('targetResult').textContent = formatNumber(target);
-                document.getElementById('finalPrice').textContent = formatNumber(sellingPrice);
-                document.getElementById('calcPrice').textContent = formatNumber(sellingPrice);
-                document.getElementById('calcRegFee').textContent = formatNumber(registrationFee);
-                document.getElementById('calcCommPercent').textContent = commissionRate.value;
-                document.getElementById('calcCommFee').textContent = formatNumber(commissionFee);
-                document.getElementById('calcNet').textContent = formatNumber(netAmount);              
-                result.style.display = 'block';
-            });
-            
+                    const commissionPercent = parseFloat(commissionRate.value) / 100;
+                    const registrationFeePercent = 0.02;
+                    const sellingPrice = target / (1 - (registrationFeePercent + commissionPercent));
+                    const registrationFee = sellingPrice * registrationFeePercent;
+                    const commissionFee = sellingPrice * commissionPercent;
+                    const netAmount = sellingPrice - registrationFee - commissionFee;
+                    
+                    document.getElementById('targetResult').textContent = formatNumber(target);
+                    document.getElementById('finalPrice').textContent = formatNumber(sellingPrice);
+                    document.getElementById('calcPrice').textContent = formatNumber(sellingPrice);
+                    document.getElementById('calcRegFee').textContent = formatNumber(registrationFee);
+                    document.getElementById('calcCommPercent').textContent = commissionRate.value;
+                    document.getElementById('calcCommFee').textContent = formatNumber(commissionFee);
+                    document.getElementById('calcNet').textContent = formatNumber(netAmount);              
+                    resultCalc.style.display = 'block';
+                });
+            }
 
+            // Tab 2
             const commissionRate2 = document.getElementById('commissionRate2');
             const commissionValue2 = document.getElementById('commissionValue2');
             const goldRate = document.getElementById('goldRate');
@@ -414,49 +517,51 @@
             const calculateGoldBtn = document.getElementById('calculateGoldBtn');
             const resultGold = document.getElementById('resultGold');
             
-            commissionRate2.addEventListener('input', function() {
-                commissionValue2.textContent = this.value + '%';
-            });
+            if (commissionRate2) {
+                commissionRate2.addEventListener('input', function() {
+                    commissionValue2.textContent = this.value + '%';
+                });
 
-            calculateGoldBtn.addEventListener('click', function() {
-                const customerMoney = parseFloat(customerMoneyInput.value);
-                const ratePerM = parseFloat(goldRate.value);
-                
-                if (isNaN(customerMoney) || customerMoney <= 0) {
-                    alert('กรุณากรอกจำนวนเงินที่ลูกค้าจ่ายเป็นตัวเลขที่มากกว่า 0');
-                    return;
-                }
-                
-                if (isNaN(ratePerM) || ratePerM <= 0) {
-                    alert('กรุณากรอกอัตราแลกเปลี่ยนเป็นตัวเลขที่มากกว่า 0');
-                    return;
-                }
+                calculateGoldBtn.addEventListener('click', function() {
+                    const customerMoney = parseFloat(customerMoneyInput.value);
+                    const ratePerM = parseFloat(goldRate.value);
+                    
+                    if (isNaN(customerMoney) || customerMoney <= 0) {
+                        alert('กรุณากรอกจำนวนเงินที่ลูกค้าจ่ายเป็นตัวเลขที่มากกว่า 0');
+                        return;
+                    }
+                    
+                    if (isNaN(ratePerM) || ratePerM <= 0) {
+                        alert('กรุณากรอกอัตราแลกเปลี่ยนเป็นตัวเลขที่มากกว่า 0');
+                        return;
+                    }
 
-                const goldPerBaht = 1000000 / ratePerM;
-                const customerShouldGetGold = customerMoney * goldPerBaht;
-                
-                const commissionPercent = parseFloat(commissionRate2.value) / 100;
-                const registrationFeePercent = 0.02;
-                
-                const sellingPriceGold = customerShouldGetGold / (1 - (registrationFeePercent + commissionPercent));
-                const registrationFeeGold = sellingPriceGold * registrationFeePercent;
-                const commissionFeeGold = sellingPriceGold * commissionPercent;
-                const netAmountGold = sellingPriceGold - registrationFeeGold - commissionFeeGold;
-                
-                document.getElementById('customerMoneyResult').textContent = formatCurrency(customerMoney);
-                document.getElementById('customerGetsGold').textContent = formatNumber(customerShouldGetGold);
-                document.getElementById('finalPriceGold').textContent = formatNumber(sellingPriceGold);
-                
-                document.getElementById('calcPriceGold').textContent = formatNumber(sellingPriceGold);
-                document.getElementById('calcRegFeeGold').textContent = formatNumber(registrationFeeGold);
-                document.getElementById('calcCommPercentGold').textContent = commissionRate2.value;
-                document.getElementById('calcCommFeeGold').textContent = formatNumber(commissionFeeGold);
-                document.getElementById('calcNetGold').textContent = formatNumber(netAmountGold);
-                
-                resultGold.style.display = 'block';
-            });
+                    const goldPerBaht = 1000000 / ratePerM;
+                    const customerShouldGetGold = customerMoney * goldPerBaht;
+                    
+                    const commissionPercent = parseFloat(commissionRate2.value) / 100;
+                    const registrationFeePercent = 0.02;
+                    
+                    const sellingPriceGold = customerShouldGetGold / (1 - (registrationFeePercent + commissionPercent));
+                    const registrationFeeGold = sellingPriceGold * registrationFeePercent;
+                    const commissionFeeGold = sellingPriceGold * commissionPercent;
+                    const netAmountGold = sellingPriceGold - registrationFeeGold - commissionFeeGold;
+                    
+                    document.getElementById('customerMoneyResult').textContent = formatCurrency(customerMoney);
+                    document.getElementById('customerGetsGold').textContent = formatNumber(customerShouldGetGold);
+                    document.getElementById('finalPriceGold').textContent = formatNumber(sellingPriceGold);
+                    
+                    document.getElementById('calcPriceGold').textContent = formatNumber(sellingPriceGold);
+                    document.getElementById('calcRegFeeGold').textContent = formatNumber(registrationFeeGold);
+                    document.getElementById('calcCommPercentGold').textContent = commissionRate2.value;
+                    document.getElementById('calcCommFeeGold').textContent = formatNumber(commissionFeeGold);
+                    document.getElementById('calcNetGold').textContent = formatNumber(netAmountGold);
+                    
+                    resultGold.style.display = 'block';
+                });
+            }
 
-
+            // Tab 3
             const commissionRate3 = document.getElementById('commissionRate3');
             const commissionValue3 = document.getElementById('commissionValue3');
             const goldRate3 = document.getElementById('goldRate3');
@@ -464,61 +569,56 @@
             const calculateGoldSellBtn = document.getElementById('calculateGoldSellBtn');
             const resultGoldSell = document.getElementById('resultGoldSell');
             
-            commissionRate3.addEventListener('input', function() {
-                commissionValue3.textContent = this.value + '%';
-            });
+            if (commissionRate3) {
+                commissionRate3.addEventListener('input', function() {
+                    commissionValue3.textContent = this.value + '%';
+                });
 
-            calculateGoldSellBtn.addEventListener('click', function() {
-                const targetGold = parseFloat(targetGoldAmount.value); 
-                const ratePerM = parseFloat(goldRate3.value); 
-                
-                if (isNaN(targetGold) || targetGold <= 0) {
-                    alert('กรุณากรอกจำนวน Gold ที่ต้องการขายเป็นตัวเลขที่มากกว่า 0');
-                    return;
-                }
-                
-                if (isNaN(ratePerM) || ratePerM <= 0) {
-                    alert('กรุณากรอกอัตราแลกเปลี่ยนเป็นตัวเลขที่มากกว่า 0');
-                    return;
-                }
+                calculateGoldSellBtn.addEventListener('click', function() {
+                    const targetGold = parseFloat(targetGoldAmount.value); 
+                    const ratePerM = parseFloat(goldRate3.value); 
+                    
+                    if (isNaN(targetGold) || targetGold <= 0) {
+                        alert('กรุณากรอกจำนวน Gold ที่ต้องการขายเป็นตัวเลขที่มากกว่า 0');
+                        return;
+                    }
+                    
+                    if (isNaN(ratePerM) || ratePerM <= 0) {
+                        alert('กรุณากรอกอัตราแลกเปลี่ยนเป็นตัวเลขที่มากกว่า 0');
+                        return;
+                    }
 
+                    document.getElementById('displayExchangeRate').textContent = formatCurrency(ratePerM);
 
-                document.getElementById('displayExchangeRate').textContent = formatCurrency(ratePerM);
+                    const targetGoldM = targetGold / 1000000;
+                    const totalValueBaht = targetGoldM * ratePerM;
+                    
+                    const commissionPercent = parseFloat(commissionRate3.value) / 100;
+                    const registrationFeePercent = 0.02;
 
-
-                const targetGoldM = targetGold / 1000000;
-                const totalValueBaht = targetGoldM * ratePerM;
-                
-
-                const commissionPercent = parseFloat(commissionRate3.value) / 100;
-                const registrationFeePercent = 0.02;
-
-                const sellingPriceGold = targetGold / (1 - (registrationFeePercent + commissionPercent));
-                const registrationFeeGold = sellingPriceGold * registrationFeePercent;
-                const commissionFeeGold = sellingPriceGold * commissionPercent;
-                const netAmountGold = sellingPriceGold - registrationFeeGold - commissionFeeGold;
-                
-
-                document.getElementById('targetGoldAmountResult').textContent = formatNumber(targetGold);
-                document.getElementById('goldToBahtResult').textContent = formatCurrency(totalValueBaht);
-                document.getElementById('targetGoldFinal3').textContent = formatNumber(targetGold);
-                document.getElementById('finalPriceGold3').textContent = formatNumber(sellingPriceGold);
-                
-
-                document.getElementById('calcPriceGold3').textContent = formatNumber(sellingPriceGold);
-                document.getElementById('calcRegFeeGold3').textContent = formatNumber(registrationFeeGold);
-                document.getElementById('calcCommPercentGold3').textContent = commissionRate3.value;
-                document.getElementById('calcCommFeeGold3').textContent = formatNumber(commissionFeeGold);
-                document.getElementById('calcNetGold3').textContent = formatNumber(netAmountGold);
-                
-
-                document.getElementById('totalValueBaht').textContent = formatCurrency(totalValueBaht);
-                document.getElementById('netAmountBaht').textContent = formatCurrency(totalValueBaht);
-                
-                resultGoldSell.style.display = 'block';
-            });
+                    const sellingPriceGold = targetGold / (1 - (registrationFeePercent + commissionPercent));
+                    const registrationFeeGold = sellingPriceGold * registrationFeePercent;
+                    const commissionFeeGold = sellingPriceGold * commissionPercent;
+                    const netAmountGold = sellingPriceGold - registrationFeeGold - commissionFeeGold;
+                    
+                    document.getElementById('targetGoldAmountResult').textContent = formatNumber(targetGold);
+                    document.getElementById('goldToBahtResult').textContent = formatCurrency(totalValueBaht);
+                    document.getElementById('targetGoldFinal3').textContent = formatNumber(targetGold);
+                    document.getElementById('finalPriceGold3').textContent = formatNumber(sellingPriceGold);
+                    
+                    document.getElementById('calcPriceGold3').textContent = formatNumber(sellingPriceGold);
+                    document.getElementById('calcRegFeeGold3').textContent = formatNumber(registrationFeeGold);
+                    document.getElementById('calcCommPercentGold3').textContent = commissionRate3.value;
+                    document.getElementById('calcCommFeeGold3').textContent = formatNumber(commissionFeeGold);
+                    document.getElementById('calcNetGold3').textContent = formatNumber(netAmountGold);
+                    
+                    document.getElementById('totalValueBaht').textContent = formatCurrency(totalValueBaht);
+                    document.getElementById('netAmountBaht').textContent = formatCurrency(totalValueBaht);
+                    
+                    resultGoldSell.style.display = 'block';
+                });
+            }
         });
     </script>
 </body>
 </html>
-

@@ -1,0 +1,471 @@
+/* CSS ที่แก้แล้ว - รวมโค้ดซ้ำ */
+
+/* ====== RESET & BASE ====== */
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 12px;
+    background: #f6f8fb;
+    color: #111;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(10, 20, 30, 0.06);
+}
+
+/* ====== ANIMATIONS ====== */
+.counter-updated {
+    animation: counterPop 0.3s ease;
+}
+
+@keyframes counterPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.rarity-animation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    padding: 30px 50px;
+    border-radius: 20px;
+    text-align: center;
+    animation: rarityGlow 2s ease;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+}
+
+.rarity-animation.legendary {
+    background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+    color: #000;
+}
+
+.rarity-animation.epic {
+    background: linear-gradient(45deg, #9c27b0, #ba68c8, #9c27b0);
+    color: white;
+}
+
+.rarity-text {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.item-text {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+@keyframes rarityGlow {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.fade-out {
+    animation: fadeOut 1s ease forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* ====== GACHA LAYOUT ====== */
+.header-area {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 12px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-grow: 1;
+}
+
+/* ====== BUTTONS ====== */
+button {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    opacity: 0.95;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.reset-btn {
+    background-color: #f44336;
+}
+
+.reset-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* ====== RESULT DISPLAY ====== */
+.result {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px;
+    border: 1px dashed #ddd;
+    border-radius: 8px;
+    min-height: 80px;
+}
+
+/* Calculator Result Box */
+.result.calc-result {
+    background-color: #e8f4fd;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    border-left: 4px solid #2196F3;
+}
+
+.result.calc-result h3 {
+    margin-top: 0;
+    color: #2196F3;
+}
+
+/* ====== ITEM CARDS ====== */
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px;
+    border-radius: 6px;
+    background: #fff;
+    border: 1px solid #eee;
+    width: 110px;
+}
+
+.card img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+}
+
+.item-name {
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Item Name Colors (รวมเป็นชุดเดียว) */
+.item-name.legendary { color: #ffcc00; }
+.item-name.epic { color: #af42f8; }
+.item-name.artisan { color: aqua; }
+.item-name.rare { color: #04ff10; }
+.item-name.common { color: #666; }
+
+/* ====== LOG PANEL ====== */
+.log-panel {
+    width: 350px;
+    height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    background: #1e1e1e;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+.log-entry {
+    padding: 8px 10px;
+    border-bottom: 1px solid #444;
+    font-size: 14px;
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+.log-time {
+    color: #aaa;
+    font-size: 12px;
+}
+
+.log-name {
+    font-weight: bold;
+}
+
+.log-rarity {
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    color: white;
+}
+
+/* Log Rarity Colors (รวมเป็นชุดเดียว) */
+.log-common { color: white; }
+.log-rare { color: #04ff10; }
+.log-artisan { color: aqua; }
+.log-epic { color: #af42f8; }
+.log-legendary { color: #ffcc00; }
+
+.log-rarity.legendary { background-color: #ffd700; color: #000; }
+.log-rarity.epic { background-color: #9c27b0; }
+.log-rarity.artisan { background-color: #2196f3; } /* เพิ่มบรรทัดนี้ */
+.log-rarity.rare { background-color: #4caf50; }
+.log-rarity.common { background-color: #9e9e9e; }
+
+/* ====== COUNTERS ====== */
+.counter-container {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+}
+
+.counter-container h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 16px;
+}
+
+.counters {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.counter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: white;
+    border-left: 4px solid;
+}
+
+.counter.legendary { border-color: #ffd700; background-color: #fff8e1; }
+.counter.epic { border-color: #9c27b0; background-color: #f3e5f5; }
+.counter.artisan { border-color: #2196f3; background-color: #e3f2fd; }
+.counter.rare { border-color: #4caf50; background-color: #e8f5e9; }
+.counter.common { border-color: #9e9e9e; background-color: #f5f5f5; }
+.counter.total { 
+    border-color: #ff5722; 
+    background-color: #ffecb3;
+    grid-column: span 2;
+    font-weight: bold;
+}
+
+.counter-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.counter-value {
+    font-weight: bold;
+    font-size: 18px;
+    color: #000;
+}
+
+/* ====== CALCULATOR STYLES ====== */
+.calculator-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.tab-container {
+    margin-bottom: 20px;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    margin-right: 5px;
+}
+
+.tab.active {
+    background-color: white;
+    border-bottom: 2px solid white;
+    margin-bottom: -2px;
+    font-weight: bold;
+    color: #2196F3;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px 0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ====== FORM STYLES ====== */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="number"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+input[type="range"] {
+    flex-grow: 1;
+}
+
+.percentage-value {
+    min-width: 50px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ====== CALCULATION BOXES ====== */
+.calculation {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.calculation h4 {
+    margin-top: 0;
+    color: #555;
+}
+
+.exchange-rate {
+    background-color: #fff3cd;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border-left: 4px solid #ffc107;
+}
+
+.gold-result {
+    background-color: #d4edda;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    border-left: 4px solid #28a745;
+}
+
+.exchange-info {
+    background-color: #e7f3ff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border-left: 4px solid #2196F3;
+}
+
+/* ====== TEXT & NUMBER STYLES ====== */
+.gold-number {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c5f2d;
+}
+
+.unit {
+    font-size: 0.9em;
+    color: #666;
+    margin-left: 5px;
+}
+
+.note {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* ====== INPUT GROUPS ====== */
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-group input {
+    flex: 1;
+}
+
+.input-group span {
+    white-space: nowrap;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 520px) {
+    .controls {
+        align-items: flex-start;
+    }
+    
+    .header-area {
+        flex-direction: column;
+    }
+    
+    .log-panel {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .buttons {
+        flex-direction: column;
+    }
+    
+    .counters {
+        grid-template-columns: 1fr;
+    }
+    
+    .counter.total {
+        grid-column: span 1;
+    }
+}
