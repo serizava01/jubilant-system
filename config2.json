@@ -2,11 +2,11 @@
     "Horizonth": true,
     "Honkai_StarRail": true,
     "Macro": true,
-    "AutoSupply_Box": false,
-    "Zenless_Zone_Zero": true,
+    "AutoSupply_Box": null,
+    "Zenless_Zone_Zero": null,
     "Cs2": null,
-    "arknight_endfield": true,
-    "BlueArchive": true,
+    "arknight_endfield": null,
+    "BlueArchive": null,
 }
 
 
