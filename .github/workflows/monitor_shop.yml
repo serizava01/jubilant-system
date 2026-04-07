@@ -1,0 +1,32 @@
+name: GAG Shop Monitor
+
+on:
+  schedule:
+    - cron: '*/10 * * * *' # รันทุก 10 นาที
+  workflow_dispatch:      # ปุ่มสำหรับกดรันเองเพื่อทดสอบ
+
+jobs:
+  check_shop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Run Monitor App
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }} # ต้องไปตั้งค่าใน Settings ของ Repo
+        run: |
+          dotnet run --project YourProjectName.csproj
+
+      - name: Save Latest Data
+        run: |
+          git config --global user.name 'GitHub Action Bot'
+          git config --global user.email 'action@github.com'
+          git add last_shop.json
+          git commit -m "Update shop data [skip ci]" || exit 0
+          git push
